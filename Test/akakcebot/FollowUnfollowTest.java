@@ -1,5 +1,6 @@
 package akakcebot;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -17,6 +18,9 @@ public class FollowUnfollowTest {
     static WebDriver driver;
     static BOT bot;
     static WebDriverWait wait;
+    Dotenv dotenv = Dotenv.load();
+    String email = dotenv.get("AKAKCE_EMAIL");
+    String password = dotenv.get("AKAKCE_PASSWORD");
 
     @BeforeEach
     public void initialize() throws InterruptedException {
@@ -25,7 +29,7 @@ public class FollowUnfollowTest {
         driver = bot.getDriver();
         wait=bot.getWait();
         driver.manage().window().maximize();
-        bot.login("testmailtesting@gmail.com", "123456789Test");
+        bot.login(email, password);
         bot.unfollowall();
         Thread.sleep(1500);
     }
@@ -132,7 +136,7 @@ public class FollowUnfollowTest {
         Thread.sleep(500);
         bot.logout();
         Thread.sleep(500);
-        bot.login("testmailtesting@gmail.com", "123456789Test");
+        bot.login(email,password);
         bot.goFollowingList();
         Thread.sleep(1500);
         List<WebElement> items = driver.findElements(By.xpath("//span[@class='fl-mc-i-n']"));

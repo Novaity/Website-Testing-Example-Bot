@@ -1,5 +1,6 @@
 package akakcebot;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,7 +18,9 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PriceCompRedirectTest {
     static WebDriver driver;
     static BOT bot;
-
+    Dotenv dotenv = Dotenv.load();
+    String email = dotenv.get("AKAKCE_EMAIL");
+    String password = dotenv.get("AKAKCE_PASSWORD");
 
     @BeforeEach
     public void initialize() {
@@ -35,7 +38,7 @@ public class PriceCompRedirectTest {
     // Test if logged-in user can see the price comparison table
     @Test
     public void testLoggedInUserSeesPriceComparison() throws InterruptedException {
-        bot.login("testmailtesting@gmail.com", "123456789Test");
+        bot.login(email,password);
         Thread.sleep(500);
         bot.gotoDetail("iphone 13"); // Go to product detail
         WebElement priceList = driver.findElement(By.id("PL"));

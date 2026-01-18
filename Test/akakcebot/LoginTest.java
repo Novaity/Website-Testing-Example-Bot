@@ -5,6 +5,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import io.github.cdimascio.dotenv.Dotenv;
 
 import java.time.Duration;
 
@@ -15,6 +16,9 @@ class LoginTest {
     WebDriver driver;
     BOT bot;
     WebDriverWait wait;
+    Dotenv dotenv = Dotenv.load();
+    String email = dotenv.get("AKAKCE_EMAIL");
+    String password = dotenv.get("AKAKCE_PASSWORD");
 
     @BeforeEach
 
@@ -22,6 +26,7 @@ class LoginTest {
         // Initializes WebDriver and BOT before all tests
         bot = new BOT();
         driver = bot.getDriver();
+
         wait = new WebDriverWait(driver, Duration.ofSeconds(2));
         driver.manage().window().maximize();
     }
@@ -36,7 +41,7 @@ class LoginTest {
     @Order(1)
     void testLoginWithValidCredentials() {
         // Tests login with correct credentials
-        boolean result = bot.login("testmailtesting@gmail.com", "123456789Test");
+        boolean result = bot.login(email, password);
         assertTrue(result);
     }
 
@@ -44,7 +49,7 @@ class LoginTest {
     @Order(2)
     void testLoginWithIncorrectPassword() {
         // Tests login with incorrect password
-        boolean result = bot.login("testmailtesting@gmail.com", "wrong_password");
+        boolean result = bot.login(email, "wrong_password");
         WebElement alert = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#m-w > div > div.m-c")));
         assertNotNull(alert);
         assertFalse(result);
@@ -63,7 +68,7 @@ class LoginTest {
     @Test
     @Order(4)
     void testRememberMeOption() throws InterruptedException {
-        bot.login("testmailtesting@gmail.com", "123456789Test");
+        bot.login(email,password);
         bot.setCookies();
         assertFalse(bot.getCookie().isEmpty());
         driver.quit();
@@ -94,7 +99,7 @@ class LoginTest {
     @Order(6)
     void testRedirectionAfterLogin() {
         // Tests if redirected to main page after login
-        bot.login("testmailtesting@gmail.com", "123456789Test");
+        bot.login(email,password);
         assertTrue(driver.getCurrentUrl().contains("akakce.com"));
     }
     @Test
@@ -104,8 +109,8 @@ class LoginTest {
         driver.get("https://www.akakce.com/akakcem/giris/");
         WebElement emailField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("life")));
         WebElement passwordField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("lifp")));
-        emailField.sendKeys("testmailtesting@gmail.com");
-        passwordField.sendKeys("123456789Test");
+        emailField.sendKeys(email);
+        passwordField.sendKeys(password);
         passwordField.sendKeys(Keys.RETURN);
         wait.until(ExpectedConditions.urlContains("akakce.com"));
         assertTrue(driver.getCurrentUrl().startsWith("https://www.akakce.com"));
@@ -127,7 +132,7 @@ class LoginTest {
         // Tests rate limit after multiple failed login attempts
         int count = 0;
         while (true) {
-            bot.login("testmailtesting@gmail.com", "wrong_password");
+            bot.login(email, "wrong_password");
             WebElement warningMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#m-w > div > div.m-c > div > p")));
             String message = warningMessage.getText();
             System.out.println("Found message: " + message);
