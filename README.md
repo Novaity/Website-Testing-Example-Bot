@@ -239,8 +239,8 @@ Create a file named `.env` in the project root directory:
 
 ```env
 # Test Account Credentials
-TEST_EMAIL=testmailtesting@gmail.com
-TEST_PASSWORD=123456789Test
+TEST_EMAIL=testmail@example.com
+TEST_PASSWORD=testpass
 
 # Browser Configuration
 BROWSER=chrome
@@ -500,8 +500,8 @@ Proje kök dizininde `.env` adında bir dosya oluşturun:
 
 ```env
 # Test Hesabı Bilgileri
-TEST_EMAIL=testmailtesting@gmail.com
-TEST_PASSWORD=123456789Test
+TEST_EMAIL=testmail@example.com
+TEST_PASSWORD=testpass
 
 # Tarayıcı Ayarları
 BROWSER=chrome
