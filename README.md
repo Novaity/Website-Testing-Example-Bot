@@ -229,49 +229,6 @@ Each test will automatically:
 
 ---
 
-### Environment Configuration (.env)
-
-To avoid hardcoding sensitive or environment-specific data (such as test credentials), this project supports a `.env`-style configuration approach.
-
-#### Example `.env` file
-
-Create a file named `.env` in the project root directory:
-
-```env
-# Test Account Credentials
-TEST_EMAIL=testmail@example.com
-TEST_PASSWORD=testpass
-
-# Browser Configuration
-BROWSER=chrome
-CHROME_DRIVER_PATH=./chromedriver.exe
-
-# Timeouts (seconds)
-IMPLICIT_WAIT=10
-EXPLICIT_WAIT=10
-```
-
-> ⚠️ **Important:** Do NOT commit `.env` files to version control.
-
----
-
-### Using `.env` Values in Code (Conceptual)
-
-Environment variables can be accessed in Java using:
-
-```java
-String email = System.getenv("TEST_EMAIL");
-String password = System.getenv("TEST_PASSWORD");
-```
-
-This approach improves:
-
-* Security
-* Environment portability
-* CI/CD compatibility
-
----
-
 ### Notes
 
 * This project is for **educational and testing purposes only**
@@ -487,49 +444,6 @@ Her test sırasında:
 * Chrome otomatik açılır
 * Test senaryoları çalışır
 * Tarayıcı otomatik kapanır
-
----
-
-### Ortam Değişkenleri (.env)
-
-Hassas veya ortama bağlı bilgilerin (test hesabı, driver yolu vb.) kod içine gömülmemesi için `.env` tabanlı yapı önerilir.
-
-#### Örnek `.env` Dosyası
-
-Proje kök dizininde `.env` adında bir dosya oluşturun:
-
-```env
-# Test Hesabı Bilgileri
-TEST_EMAIL=testmail@example.com
-TEST_PASSWORD=testpass
-
-# Tarayıcı Ayarları
-BROWSER=chrome
-CHROME_DRIVER_PATH=./chromedriver.exe
-
-# Zaman Aşımı Ayarları (saniye)
-IMPLICIT_WAIT=10
-EXPLICIT_WAIT=10
-```
-
-> ⚠️ **Uyarı:** `.env` dosyasını kesinlikle GitHub’a eklemeyin.
-
----
-
-### Java İçinden `.env` Kullanımı (Mantıksal)
-
-Java tarafında ortam değişkenleri şu şekilde okunur:
-
-```java
-String email = System.getenv("TEST_EMAIL");
-String password = System.getenv("TEST_PASSWORD");
-```
-
-Bu yapı:
-
-* Güvenliği artırır
-* Ortamlar arası taşınabilirlik sağlar
-* CI/CD süreçlerine uygundur
 
 ---
 
