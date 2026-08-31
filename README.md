@@ -93,7 +93,7 @@ SE2226PROJE/
 
 ## 🏃‍♂️ How to Run
 1.  **Prerequisites:** Java 17+, Chrome Browser.
-2.  **Clone:** `git clone <repo-url>`
+2.  **Clone:** `git clone https://github.com/Efecancngz/Website-Testing-Example-Bot.git`
 3.  **Setup:** Open in IntelliJ IDEA. Ensure Selenium and JUnit 5 libraries are in the classpath.
 4.  **Execute:** Run `OrderedTestSuite.java` to execute the full regression suite in the correct dependency order, or run individual test files for isolated debugging.
 
